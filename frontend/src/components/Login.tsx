@@ -27,7 +27,6 @@ const useStyles = makeStyles((theme) => ({
 
 const Login = () => {
   const classes = useStyles();
-  // eslint-disable-next-line
   const history = useHistory();
 
   const [email, setEmail] = useState("")
@@ -53,7 +52,6 @@ const Login = () => {
       history.push('/user-info')
     })
     .catch((error) => { 
-      console.log('失敗')
       console.log(error)
     })
 
@@ -94,7 +92,6 @@ const Login = () => {
           variant="contained"
           color="primary"
           className={classes.submit}
-          // onClick={loginHandler}
         >Login</Button>
       </form>
       </div>
