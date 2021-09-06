@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   makeStyles,
   Container,
@@ -26,6 +26,9 @@ const useStyles = makeStyles((theme) => ({
 const Login = () => {
   const classes = useStyles();
 
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+
   return (
     <Container component="main" maxWidth="xs">
       <div className={classes.paper}>
@@ -39,6 +42,8 @@ const Login = () => {
           label="Email Address"
           id="email"
           autoFocus
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <TextField 
           variant="outlined"
@@ -47,7 +52,10 @@ const Login = () => {
           fullWidth
           label="Password"
           id="password"
+          type="password"
           autoFocus
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         />
         <Button
           type="submit"
