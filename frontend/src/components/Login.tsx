@@ -57,10 +57,6 @@ const Login = () => {
       console.log(error)
     })
 
-    // axios.get('http://localhost:3000/user/show/1')
-    //   .then((data) => console.log(data))
-    //   .catch((error) => console.log(error))
-
     event.preventDefault();
   }
 
