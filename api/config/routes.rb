@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :user_admins
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  devise_for :user_admins, path: '/user', 
+  path_names: {
+    sign_in: 'login',
+    registrations: 'legistrations'
+  },
+  controllers: {
+    sessions: 'user_admins/sessions',
+    registrations: 'user_admins/registrations'
+  }
 end
