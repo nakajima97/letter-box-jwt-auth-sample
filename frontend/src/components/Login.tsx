@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import axios from 'axios'
 import {
   makeStyles,
   Container,
@@ -6,6 +7,7 @@ import {
   TextField,
   Button
 } from '@material-ui/core'
+import { useHistory } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -25,15 +27,48 @@ const useStyles = makeStyles((theme) => ({
 
 const Login = () => {
   const classes = useStyles();
+  // eslint-disable-next-line
+  const history = useHistory();
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+
+  const loginHandler = (event: React.FormEvent<HTMLFormElement>) => {
+    const params = {
+      "user_admin": {
+        "email": email,
+        "password": password
+      }
+    }
+
+    const header = {
+      headers: {
+        'content-type': 'application/json'
+      }
+    }
+
+    axios.post('http://localhost:3000/user/login', params, header)
+    .then((response) => { 
+      console.log(response.headers)
+      history.push('/user-info')
+    })
+    .catch((error) => { 
+      console.log('失敗')
+      console.log(error)
+    })
+
+    // axios.get('http://localhost:3000/user/show/1')
+    //   .then((data) => console.log(data))
+    //   .catch((error) => console.log(error))
+
+    event.preventDefault();
+  }
 
   return (
     <Container component="main" maxWidth="xs">
       <div className={classes.paper}>
         <Typography>Login</Typography>
-      <form className={classes.form}>
+      <form className={classes.form} onSubmit={loginHandler}>
         <TextField 
           variant="outlined"
           margin="normal"
@@ -63,6 +98,7 @@ const Login = () => {
           variant="contained"
           color="primary"
           className={classes.submit}
+          // onClick={loginHandler}
         >Login</Button>
       </form>
       </div>
