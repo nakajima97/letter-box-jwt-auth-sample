@@ -311,7 +311,8 @@ Devise.setup do |config|
 
   # devise-jwt setting
   config.jwt do |jwt|
-    # 本来はenv使ったりするべきだが、テストアプリなので単純化するためにベタ書き
-    jwt.secrest = "123456"
+    # 本来はsecret_key_baseを使わないほうが良いが、
+    # 今回はサンプルアプリのため簡略化するためにsecret_key_baseを使用
+    jwt.secret = Rails.application.credentials.secret_key_base
   end
 end
