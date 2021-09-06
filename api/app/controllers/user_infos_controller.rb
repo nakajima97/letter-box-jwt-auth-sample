@@ -1,9 +1,14 @@
 class UserInfosController < ApplicationController
-  before_action :authenticate_user!, only: [show]
-
   def show
-    render json: {
-      name: "山田 太郎"
+    if current_user_admin
+      render json: {
+        name: "山田 太郎"
+      }
+    else
+      render json: {
+        name: "ログインして 太郎"
     }
+    end
+    
   end
 end

@@ -8,4 +8,5 @@ Rails.application.routes.draw do
     sessions: 'user_admins/sessions',
     registrations: 'user_admins/registrations'
   }
+  get '/user/show/:id', to: 'user_infos#show'
 end
