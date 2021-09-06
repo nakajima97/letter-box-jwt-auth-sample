@@ -8,6 +8,7 @@ import {
   Button
 } from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
+import { useCookies } from 'react-cookie'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -32,6 +33,9 @@ const Login = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
+  // eslint-disable-next-line
+  const [cookies, setCookie, removeCookie] = useCookies(["jwt"])
+
   const loginHandler = (event: React.FormEvent<HTMLFormElement>) => {
     const params = {
       "user_admin": {
@@ -48,7 +52,8 @@ const Login = () => {
 
     axios.post('http://localhost:3000/user/login', params, header)
     .then((response) => { 
-      console.log(response.headers)
+      // console.log(response.headers["authorization"])
+      setCookie("jwt", response.headers["authorization"])
       history.push('/user-info')
     })
     .catch((error) => { 
