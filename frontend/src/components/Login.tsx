@@ -52,7 +52,6 @@ const Login = () => {
 
     axios.post('http://localhost:3000/user/login', params, header)
     .then((response) => { 
-      // console.log(response.headers["authorization"])
       setCookie("jwt", response.headers["authorization"])
       history.push('/user-info')
     })
