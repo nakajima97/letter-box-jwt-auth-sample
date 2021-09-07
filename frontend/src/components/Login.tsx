@@ -47,7 +47,8 @@ const Login = () => {
     const options = {
       headers: {
         'content-type': 'application/json'
-      }
+      },
+      withCredentials: true
     }
 
     axios.post('http://localhost:3000/user/login', params, options)

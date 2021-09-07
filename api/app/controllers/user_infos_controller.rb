@@ -9,6 +9,5 @@ class UserInfosController < ApplicationController
         name: "ログインして 太郎"
     }
     end
-    
   end
 end
