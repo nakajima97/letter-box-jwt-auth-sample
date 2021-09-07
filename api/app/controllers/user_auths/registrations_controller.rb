@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class UserAdmins::RegistrationsController < Devise::RegistrationsController
+class UserAuths::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
@@ -11,7 +11,6 @@ class UserAdmins::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    logger.debug("登録処理が実行されました")
     super
   end
 
@@ -39,7 +38,7 @@ class UserAdmins::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  protected
+  # protected
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params

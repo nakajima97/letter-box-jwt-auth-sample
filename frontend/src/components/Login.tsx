@@ -38,7 +38,7 @@ const Login = () => {
 
   const loginHandler = (event: React.FormEvent<HTMLFormElement>) => {
     const params = {
-      "user_admin": {
+      "user_auth": {
         "email": email,
         "password": password
       }

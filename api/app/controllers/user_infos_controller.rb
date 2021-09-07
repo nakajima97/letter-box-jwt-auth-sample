@@ -1,6 +1,6 @@
 class UserInfosController < ApplicationController
   def show
-    if current_user_admin
+    if current_user_auth
       render json: {
         name: "山田 太郎"
       }
