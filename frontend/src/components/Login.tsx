@@ -44,13 +44,13 @@ const Login = () => {
       }
     }
 
-    const header = {
+    const options = {
       headers: {
         'content-type': 'application/json'
       }
     }
 
-    axios.post('http://localhost:3000/user/login', params, header)
+    axios.post('http://localhost:3000/user/login', params, options)
     .then((response) => { 
       setCookie("jwt", response.headers["authorization"])
       history.push('/user-info')
