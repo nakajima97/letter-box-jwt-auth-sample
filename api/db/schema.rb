@@ -10,21 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_07_073645) do
-
-  create_table "user_admins", charset: "utf8mb4", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "jti", null: false
-    t.index ["email"], name: "index_user_admins_on_email", unique: true
-    t.index ["jti"], name: "index_user_admins_on_jti", unique: true
-    t.index ["reset_password_token"], name: "index_user_admins_on_reset_password_token", unique: true
-  end
+ActiveRecord::Schema.define(version: 2021_09_08_022740) do
 
   create_table "user_auths", charset: "utf8mb4", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -40,4 +26,13 @@ ActiveRecord::Schema.define(version: 2021_09_07_073645) do
     t.index ["reset_password_token"], name: "index_user_auths_on_reset_password_token", unique: true
   end
 
+  create_table "user_infos", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_auth_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_auth_id"], name: "index_user_infos_on_user_auth_id"
+  end
+
+  add_foreign_key "user_infos", "user_auths"
 end
