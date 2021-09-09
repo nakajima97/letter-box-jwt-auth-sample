@@ -13,7 +13,8 @@ class UserAuths::RegistrationsController < Devise::RegistrationsController
   def create
     super
     # user_auth = UserAuth.new
-    @user_auth.build_user_info(name: "test").save
+    name = params[:user_info][:name]
+    @user_auth.build_user_info(name: name).save
   end
 
   # GET /resource/edit
@@ -44,7 +45,7 @@ class UserAuths::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [user_info_attribute: [:name]])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
