@@ -8,8 +8,10 @@ import {
 } from "react-router-dom";
 
 import Login from './components/Login'
+import SingUp from './components/SignUp'
 import UserInfo from './components/UserInfo'
 import NotFound from './components/NotFound'
+import SignUp from './components/SignUp';
 
 function App() {
   return (
@@ -17,6 +19,9 @@ function App() {
       <Switch>
         <Route path='/' exact>
           <Login />
+        </Route>
+        <Route path='/sign-up'>
+          <SignUp />
         </Route>
         <Route path='/user-info'>
             <UserInfo />
