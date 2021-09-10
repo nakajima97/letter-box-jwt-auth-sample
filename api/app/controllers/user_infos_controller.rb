@@ -1,8 +1,8 @@
 class UserInfosController < ApplicationController
   def show
-    if current_user_auth
+    if user_auth_signed_in?
       render json: {
-        name: "山田 太郎"
+        name: current_user_auth.user_info.name
       }
     else
       render json: {
