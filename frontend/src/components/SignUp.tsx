@@ -74,7 +74,7 @@ const SignUp: FC = () => {
   return (
     <Container component="main" maxWidth="xs">
       <div className={classes.paper}>
-        <Typography>Sing Up</Typography>
+        <Typography>Sign Up</Typography>
         <form className={classes.form} onSubmit={signUpHandler}>
           <TextField 
             variant="outlined"
