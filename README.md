@@ -1,5 +1,6 @@
 # rails-react-jwt-auth
-Rails + ReactでJWT認証をする際の実装方法を学習するためのリポジトリ
+LetterBoxでJWT認証を用いて認証機能を実装したいと考えている。
+Rails + ReactでJWT認証が可能なのか試すためのリポジトリ
 
 # requestの形式
 ## ユーザ登録
