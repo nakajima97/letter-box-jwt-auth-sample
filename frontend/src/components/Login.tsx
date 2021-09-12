@@ -34,7 +34,7 @@ const Login = () => {
   const classes = useStyles();
   const history = useHistory();
 
-  const [email, setEmail] = useState("")
+  const [userId, setUserId] = useState("")
   const [password, setPassword] = useState("")
 
   // eslint-disable-next-line
@@ -47,7 +47,7 @@ const Login = () => {
 
     const params = {
       "user_auth": {
-        "email": email,
+        "user_id": userId,
         "password": password
       }
     }
@@ -60,19 +60,19 @@ const Login = () => {
     }
 
     axios.post('http://localhost:3000/user/login', params, options)
-    .then((response) => { 
-      if (response.headers["authorization"] === undefined) {
-        setMessage("IDまたはパスワードが違います")
-      } else {
-        setCookie("jwt", response.headers["authorization"]);
-        history.push('/user-info');
-      }
-    })
-    .catch((error) => { 
-      console.log(error)
-      setMessage(error.data.message)
-      history.push('/')
-    })
+      .then((response) => { 
+        if (response.headers["authorization"] === undefined) {
+          setMessage("IDまたはパスワードが違います")
+        } else {
+          setCookie("jwt", response.headers["authorization"]);
+          history.push('/user-info');
+        }
+      })
+      .catch((error) => { 
+        console.log(error)
+        setMessage(error.data.message)
+        history.push('/')
+      })
   }
 
   return (
@@ -86,11 +86,11 @@ const Login = () => {
           margin="normal"
           required
           fullWidth
-          label="Email Address"
-          id="email"
+          label="User Id"
+          id="user-id"
           autoFocus
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={userId}
+          onChange={(e) => setUserId(e.target.value)}
         />
         <TextField 
           variant="outlined"

@@ -34,7 +34,7 @@ const SignUp: FC = () => {
   const history = useHistory();
 
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
 
@@ -48,7 +48,7 @@ const SignUp: FC = () => {
 
     const param = {
       "user_auth": {
-        "email": email,
+        "user_id": userId,
         "password": password
       },
       "user_info": {
@@ -99,11 +99,11 @@ const SignUp: FC = () => {
             margin="normal"
             required
             fullWidth
-            label="Email Address"
-            id="email"
+            label="User Id"
+            id="user-id"
             autoFocus
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={userId}
+            onChange={(e) => setUserId(e.target.value)}
           />
           <TextField 
             variant="outlined"
