@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import axios from 'axios'
 import {
   makeStyles,
@@ -9,6 +9,10 @@ import {
 } from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
+
+import ErrorSnackbar from './ErrorSnackbar';
+
+import { ErrorContext } from '../context/Error';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -36,7 +40,11 @@ const Login = () => {
   // eslint-disable-next-line
   const [cookies, setCookie, removeCookie] = useCookies(["jwt"])
 
+  const { setMessage } = useContext(ErrorContext)
+
   const loginHandler = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
     const params = {
       "user_auth": {
         "email": email,
@@ -53,18 +61,23 @@ const Login = () => {
 
     axios.post('http://localhost:3000/user/login', params, options)
     .then((response) => { 
-      setCookie("jwt", response.headers["authorization"])
-      history.push('/user-info')
+      if (response.headers["authorization"] === undefined) {
+        setMessage("IDまたはパスワードが違います")
+      } else {
+        setCookie("jwt", response.headers["authorization"]);
+        history.push('/user-info');
+      }
     })
     .catch((error) => { 
       console.log(error)
+      setMessage(error.data.message)
+      history.push('/')
     })
-
-    event.preventDefault();
   }
 
   return (
     <Container component="main" maxWidth="xs">
+      <ErrorSnackbar />
       <div className={classes.paper}>
         <Typography>Login</Typography>
       <form className={classes.form} onSubmit={loginHandler}>

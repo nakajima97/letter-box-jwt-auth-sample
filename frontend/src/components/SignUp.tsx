@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useState, useContext } from 'react'
 import {
   makeStyles,
   Container,
@@ -9,6 +9,9 @@ import {
 import axios from 'axios';
 import { useHistory } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
+
+import { ErrorContext } from '../context/Error';
+import ErrorSnackbar from './ErrorSnackbar';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -38,6 +41,8 @@ const SignUp: FC = () => {
   // eslint-disable-next-line
   const [cookies, setCookie, removeCookie] = useCookies(["jwt"]);
 
+  const { setMessage } = useContext(ErrorContext)
+
   const signUpHandler = (event: React.FormEvent<HTMLFormElement>) => {
     if (password !== passwordConfirm) return undefined;
 
@@ -63,8 +68,8 @@ const SignUp: FC = () => {
         setCookie("jwt", response.headers["authorization"])
         history.push('/user-info')
       })
-      .catch((error) => { 
-        console.log(error)
+      .catch(() => { 
+        setMessage('ユーザの登録に失敗しました。')
       })
 
     // htmlのデフォルト動作を抑止する
@@ -73,6 +78,7 @@ const SignUp: FC = () => {
 
   return (
     <Container component="main" maxWidth="xs">
+      <ErrorSnackbar />
       <div className={classes.paper}>
         <Typography>Sign Up</Typography>
         <form className={classes.form} onSubmit={signUpHandler}>
