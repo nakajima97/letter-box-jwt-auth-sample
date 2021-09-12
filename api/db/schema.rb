@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_08_022740) do
+ActiveRecord::Schema.define(version: 2021_09_12_023817) do
 
   create_table "user_auths", charset: "utf8mb4", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -21,9 +21,10 @@ ActiveRecord::Schema.define(version: 2021_09_08_022740) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "jti", null: false
-    t.index ["email"], name: "index_user_auths_on_email", unique: true
+    t.string "user_id", default: "", null: false
     t.index ["jti"], name: "index_user_auths_on_jti", unique: true
     t.index ["reset_password_token"], name: "index_user_auths_on_reset_password_token", unique: true
+    t.index ["user_id"], name: "index_user_auths_on_user_id", unique: true
   end
 
   create_table "user_infos", charset: "utf8mb4", force: :cascade do |t|

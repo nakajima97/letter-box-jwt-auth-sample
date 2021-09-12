@@ -12,7 +12,6 @@ class UserAuths::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super
-    # user_auth = UserAuth.new
     name = params[:user_info][:name]
     @user_auth.build_user_info(name: name).save
   end
