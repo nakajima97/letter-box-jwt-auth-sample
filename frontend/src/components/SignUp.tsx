@@ -12,7 +12,7 @@ import { useCookies } from 'react-cookie'
 
 import { ErrorContext } from '../context/Error';
 
-import ErrorSnackbar from './ErrorSnackbar';
+import Message from './Message';
 import Header from './Header';
 
 const useStyles = makeStyles((theme) => ({
@@ -43,7 +43,7 @@ const SignUp: FC = () => {
   // eslint-disable-next-line
   const [cookies, setCookie, removeCookie] = useCookies(["jwt"]);
 
-  const { setMessage } = useContext(ErrorContext)
+  const { setMessage, setSeverity } = useContext(ErrorContext)
 
   const signUpHandler = (event: React.FormEvent<HTMLFormElement>) => {
     if (password !== passwordConfirm) return undefined;
@@ -71,7 +71,8 @@ const SignUp: FC = () => {
         history.push('/user-info')
       })
       .catch(() => { 
-        setMessage('ユーザの登録に失敗しました。')
+          setSeverity("error")
+          setMessage('ユーザの登録に失敗しました。')
       })
 
     // htmlのデフォルト動作を抑止する
@@ -82,7 +83,7 @@ const SignUp: FC = () => {
     <>
     <Header />
     <Container component="main" maxWidth="xs">
-      <ErrorSnackbar />
+      <Message />
       <div className={classes.paper}>
         <Typography>Sign Up</Typography>
         <form className={classes.form} onSubmit={signUpHandler}>

@@ -3,11 +3,8 @@ import { Snackbar, Alert } from '@mui/material'
 
 import { ErrorContext } from '../context/Error';
 
-type Props = {
-}
-
-const ErrorSnackbar: FC<Props> = () => {
-  const { message, setMessage } = useContext(ErrorContext)
+const Message: FC = () => {
+  const { message, setMessage, severity } = useContext(ErrorContext)
 
   const handleClose = () => {
     setMessage("");
@@ -18,7 +15,7 @@ const ErrorSnackbar: FC<Props> = () => {
   return (
     <div>
       <Snackbar open={handleOpen} onClose={handleClose}>
-        <Alert severity='error'>
+        <Alert severity={severity}>
           {message}
         </Alert>
       </Snackbar>
@@ -26,4 +23,4 @@ const ErrorSnackbar: FC<Props> = () => {
   )
 }
 
-export default ErrorSnackbar
+export default Message

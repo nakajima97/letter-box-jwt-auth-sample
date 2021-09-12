@@ -4,14 +4,12 @@ import { useHistory } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 import axios from 'axios';
 
-import ErrorSnackbar from './ErrorSnackbar';
-
 import { ErrorContext } from '../context/Error'
 
 const Header = () => {
   // eslint-disable-next-line
   const [cookies, setCookie, removeCookie] = useCookies(["jwt"])
-  const { setMessage } = useContext(ErrorContext)
+  const { setMessage, setSeverity } = useContext(ErrorContext)
 
   const history = useHistory()
 
@@ -28,10 +26,12 @@ const Header = () => {
       axios.delete('http://localhost:3000/user/logout', options)
         .then(() => {
           removeCookie("jwt")
+          setSeverity("info")
           setMessage("ログアウトしました")
           history.push('/')
         })
         .catch(() => {
+          setSeverity("error")
           setMessage("ログアウト処理に失敗しました")
         })
     } else {
@@ -47,7 +47,6 @@ const Header = () => {
 
   return (
     <>
-      <ErrorSnackbar />
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar>

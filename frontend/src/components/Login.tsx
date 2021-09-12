@@ -10,7 +10,7 @@ import {
 import { useHistory } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 
-import ErrorSnackbar from './ErrorSnackbar';
+import Message from './Message';
 
 import { ErrorContext } from '../context/Error';
 import Header from './Header'
@@ -41,7 +41,7 @@ const Login = () => {
   // eslint-disable-next-line
   const [cookies, setCookie, removeCookie] = useCookies(["jwt"])
 
-  const { setMessage } = useContext(ErrorContext)
+  const { setMessage, setSeverity } = useContext(ErrorContext)
 
   const loginHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -63,6 +63,7 @@ const Login = () => {
     axios.post('http://localhost:3000/user/login', params, options)
       .then((response) => { 
         if (response.headers["authorization"] === undefined) {
+          setSeverity("error")
           setMessage("IDまたはパスワードが違います")
         } else {
           setCookie("jwt", response.headers["authorization"]);
@@ -70,6 +71,7 @@ const Login = () => {
         }
       })
       .catch(() => { 
+        setSeverity("error")
         setMessage("ログインに失敗しました")
         history.push('/login')
       })
@@ -79,7 +81,7 @@ const Login = () => {
     <>
     <Header></Header>
     <Container component="main" maxWidth="xs">
-      <ErrorSnackbar />
+      <Message />
       <div className={classes.paper}>
         <Typography>Login</Typography>
       <form className={classes.form} onSubmit={loginHandler}>
