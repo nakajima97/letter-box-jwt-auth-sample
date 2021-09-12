@@ -14,9 +14,9 @@ class UserAuths::SessionsController < Devise::SessionsController
   end
 
   # DELETE /resource/sign_out
-  # def destroy
-  #   super
-  # end
+  def destroy
+    super
+  end
 
   protected
 
@@ -32,7 +32,7 @@ class UserAuths::SessionsController < Devise::SessionsController
   end
 
   def respond_to_on_destroy
-    log_out_success && return if current_user
+    log_out_success && return if current_user_auth
 
     log_out_failure
   end

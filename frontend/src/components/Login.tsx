@@ -69,10 +69,9 @@ const Login = () => {
           history.push('/user-info');
         }
       })
-      .catch((error) => { 
-        console.log(error)
-        setMessage(error.data.message)
-        history.push('/')
+      .catch(() => { 
+        setMessage("ログインに失敗しました")
+        history.push('/login')
       })
   }
 
