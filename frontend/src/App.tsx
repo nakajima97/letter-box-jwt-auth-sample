@@ -11,6 +11,7 @@ import Login from './components/Login'
 import UserInfo from './components/UserInfo'
 import NotFound from './components/NotFound'
 import SignUp from './components/SignUp';
+import Top from './components/Top';
 
 import { ErrorProvider } from './context/Error'
 
@@ -20,6 +21,9 @@ function App() {
       <Router>
         <Switch>
           <Route path='/' exact>
+            <Top />
+          </Route>
+          <Route path='/login' >
             <Login />
           </Route>
           <Route path='/sign-up'>

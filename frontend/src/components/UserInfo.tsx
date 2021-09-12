@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import { useCookies } from 'react-cookie'
 
+import Header from './Header'
+
 const UserInfo = () => {
   const [message, setMessage] = useState("");
     // eslint-disable-next-line
@@ -22,9 +24,12 @@ const UserInfo = () => {
   })
 
   return (
+    <>
+    <Header />
     <div>
-      {message}
+      名前：{message}
     </div>
+    </>
   )
 }
 

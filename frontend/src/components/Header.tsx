@@ -10,12 +10,16 @@ const Header = () => {
   const history = useHistory()
 
   const onClick = () => {
-    if (cookies) {
+    if (cookies.jwt) {
       removeCookie("jwt")
       history.push('/')
     } else {
-      history.push('/')
+      history.push('/login')
     }
+  }
+
+  const onClickTitle = () => {
+    history.push('/')
   }
 
   const buttonText = cookies.jwt ? "Logout" : "Login"
@@ -24,7 +28,7 @@ const Header = () => {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} >
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1, cursor: "pointer" }} onClick={onClickTitle}>
             JWTサンプルアプリ
           </Typography>
           <Button color="inherit" onClick={onClick}>{buttonText}</Button>
