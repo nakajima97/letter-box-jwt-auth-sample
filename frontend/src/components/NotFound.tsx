@@ -1,10 +1,15 @@
 import React from 'react'
 
+import Header from './Header'
+
 const NotFound = () => {
   return (
-    <div>
-      404 
-    </div>
+    <>
+      <Header />
+      <div>
+        404 
+      </div>
+    </>
   )
 }
 

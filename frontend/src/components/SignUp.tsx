@@ -11,7 +11,9 @@ import { useHistory } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 
 import { ErrorContext } from '../context/Error';
+
 import ErrorSnackbar from './ErrorSnackbar';
+import Header from './Header';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -77,6 +79,8 @@ const SignUp: FC = () => {
   }
 
   return (
+    <>
+    <Header />
     <Container component="main" maxWidth="xs">
       <ErrorSnackbar />
       <div className={classes.paper}>
@@ -139,6 +143,7 @@ const SignUp: FC = () => {
         </form>
       </div>
     </Container>
+    </>
   )
 }
 

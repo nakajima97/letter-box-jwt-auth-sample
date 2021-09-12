@@ -13,6 +13,7 @@ import { useCookies } from 'react-cookie'
 import ErrorSnackbar from './ErrorSnackbar';
 
 import { ErrorContext } from '../context/Error';
+import Header from './Header'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -76,6 +77,8 @@ const Login = () => {
   }
 
   return (
+    <>
+    <Header></Header>
     <Container component="main" maxWidth="xs">
       <ErrorSnackbar />
       <div className={classes.paper}>
@@ -114,6 +117,7 @@ const Login = () => {
       </form>
       </div>
     </Container>
+    </>
   )
 }
 
